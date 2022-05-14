@@ -1,4 +1,4 @@
-package java.com.demo1.jooletest.Entity;
+package com.itlize.Joole.entity;
 
 import javax.persistence.*;
 
