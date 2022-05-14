@@ -1,4 +1,4 @@
-package java.com.demo1.jooletest.Repository;
+package com.itlize.Joole.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
