@@ -1,83 +1,77 @@
 package com.itlize.Joole.entity;
-
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
-@Table(name="ProductInfo")
-public class ProductInfo {
-
+@Table(name="Category")
+public class Category {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="productInfo_id")
-    private Integer productInfo_id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="Category_id")
+    private Integer Category_id;
+
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="Category",
+            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH,
+                    CascadeType.REMOVE})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Product> Products = new ArrayList<>();
 
 
-    @OneToOne(mappedBy="productInfo",
-            cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    private Product product;
-
-    @Column(name="product_details")
-    private String product_details;
-
-    @Column(name="contact")
-    private String contact;
-
-    @Column(name="documentation")
-    private String documentation;
+    @Column(name="Category_name")
+    private String Category_name ;
 
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public ProductInfo() {
+    public Category() {
 
     }
 
-    public ProductInfo(String product_details, String contact,String documentation) {
-        this.product_details = product_details;
-        this.contact = contact;
-        this.documentation = documentation;
+    public Category(String Category_name) {
+        this.Category_name = Category_name;
+
     }
 
     public int getId() {
-        return productInfo_id;
+        return Category_id;
     }
 
-    public void setId(int productInfo_id) {
-        this.productInfo_id = productInfo_id;
+    public void setId(int Category_id) {
+        this.Category_id = Category_id;
     }
 
-    public String getProductdetails() {
-        return product_details;
+    public String getCategoryName() {
+        return Category_name;
     }
 
-    public void setProductdetails(String product_details) {
-        this.product_details = product_details;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getDocumentation() {
-        return documentation;
-    }
-
-    public void setDocumentation(String documentation) {
-        this.documentation = documentation;
+    public void setCategoryName(String Category_name) {
+        this.Category_name = Category_name;
     }
 
 
+    public List<Product> getCourses() {
+        return Products;
+    }
+
+    public void setCourses(List<Product> Products) {
+        this.Products = Products;
+    }
+
+    // add convenience methods for bi-directional relationship
+
+    public void add(Product tempProduct) {
+
+        if(Products.contains(tempProduct)) {
+            return;
+        }
+
+        Products.add(tempProduct);
+
+        tempProduct.setCategory(this);
+    }
 
 }
+
