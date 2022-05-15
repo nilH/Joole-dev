@@ -14,7 +14,9 @@ public class TechnicalSpecs {
     private String attributeName;
     private double value;
     private String unit;
-
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
     public int getTechnicalDetailId() {
         return technicalDetailId;
     }

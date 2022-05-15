@@ -15,6 +15,10 @@ public class ProductType {
     private String attributeName;
     private String value;
 
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+
     public int getProductTypeId() {
         return productTypeId;
     }
@@ -37,6 +41,14 @@ public class ProductType {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
