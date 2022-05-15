@@ -1,4 +1,13 @@
 package com.itlize.Joole.entity;
 
-public class Product {
+import javax.persistence.*;
+
+import java.time.LocalDateTime;
+
+
+
+@Entity
+@Table(name="product")
+public class Product{
+
 }
