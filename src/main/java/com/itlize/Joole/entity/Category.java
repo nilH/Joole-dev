@@ -14,7 +14,7 @@ public class Category {
     private Integer Category_id;
 
     @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="Category",
+            mappedBy="category",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH,
                     CascadeType.REMOVE})
