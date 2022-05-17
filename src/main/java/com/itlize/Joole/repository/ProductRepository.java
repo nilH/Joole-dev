@@ -1,5 +1,6 @@
 package com.itlize.Joole.repository;
 
+import com.itlize.Joole.entity.Category;
 import com.itlize.Joole.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Integer>,ProductRepositoryCustom {
-    List<Product> findByTypeIgnoreCaseContaining(String productName);
+    List<Product> findByCategoryCategoryIdAndTypeIgnoreCaseContaining(int categoryId, String type);
 }

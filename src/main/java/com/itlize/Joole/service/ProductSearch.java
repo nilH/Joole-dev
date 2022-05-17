@@ -7,6 +7,6 @@ import com.itlize.Joole.entity.TechnicalSpecs;
 import java.util.List;
 
 public interface ProductSearch {
-    public List<Product> searchByName(String name);
+    public List<Product> searchByName(String name,int categoryId);
     public List<Product> filterByTypeAndSpecs(List<ProductType> productTypeList, List<TechnicalSpecs> technicalSpecsList);
 }

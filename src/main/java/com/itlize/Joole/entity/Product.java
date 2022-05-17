@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="product")
+@Table(name="product",indexes = @Index(name = "lineSearch",columnList = "category,type"))
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,7 @@ public class Product {
     private LocalDateTime modelYear;
     @NotNull
     private String brand;
-    @NotNull
+
     private String certificate;
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category_id")
@@ -40,7 +40,7 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
     private ProductInfo productInfo;
-    @NotNull
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
