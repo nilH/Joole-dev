@@ -3,6 +3,7 @@ package com.itlize.Joole.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,7 @@ public class Project {
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private Set<ProjectProduct> projectProduct;
+    private Set<ProjectProduct> projectProduct = new HashSet<>();
 
 
     public void setUser(User user) {

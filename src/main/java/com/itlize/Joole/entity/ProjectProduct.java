@@ -10,9 +10,9 @@ public class ProjectProduct {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="PR_id")
-    private int id;
+    private Integer id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="product_id")
     private Product product;
 

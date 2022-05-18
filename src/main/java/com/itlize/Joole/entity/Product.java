@@ -22,7 +22,7 @@ public class Product {
             mappedBy="product",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private Set<ProjectProduct> projectProductSet;
+    private final Set<ProjectProduct> projectProductSet = new HashSet<>();
 
     @NotNull
     @Column(name="time_created")
