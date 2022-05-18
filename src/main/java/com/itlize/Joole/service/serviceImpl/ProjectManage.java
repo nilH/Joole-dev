@@ -30,6 +30,7 @@ public class ProjectManage {
         pp.setProject(project);
 
         ppSet.add(pp);
+        
 
         project.setProjectProduct(ppSet);
 
