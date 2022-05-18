@@ -5,7 +5,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,9 +17,13 @@ public class Product {
     @NotNull
     @Column(name="product_name")
     private String productName;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "project_product",joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private Set<Project> projectSet=new HashSet<>();
+
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="product",
+            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private Set<ProjectProduct> projectProductSet;
+
     @NotNull
     @Column(name="time_created")
     private LocalDateTime timeCreated;
@@ -73,13 +76,14 @@ public class Product {
 
     public String getCategory() {
         return category;
+    }
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
     public void setCategory(String category) {
         this.category = category;
-
+    }
     public String getManufacturer() {
         return manufacturer;
     }

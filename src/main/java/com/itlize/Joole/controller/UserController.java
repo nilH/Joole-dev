@@ -1,17 +1,10 @@
 package com.itlize.Joole.controller;
 //login register logout
 
-import com.itlize.Joole.service.UserService;
-import com.itlize.Joole.entity.*;
+import com.itlize.Joole.service.serviceImpl.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")

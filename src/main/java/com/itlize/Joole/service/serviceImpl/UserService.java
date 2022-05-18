@@ -1,4 +1,4 @@
-package com.itlize.Joole.service;
+package com.itlize.Joole.service.serviceImpl;
 
 import com.itlize.Joole.entity.User;
 import com.itlize.Joole.repository.UserRepository;

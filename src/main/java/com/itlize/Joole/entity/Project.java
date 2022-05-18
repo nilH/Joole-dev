@@ -23,6 +23,9 @@ public class Project {
     private LocalDateTime timeCreated;
 
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="customer_id")
+    private User user;
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
@@ -30,6 +33,21 @@ public class Project {
     private Set<ProjectProduct> projectProduct;
 
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getProjectName() {
         return projectName;
