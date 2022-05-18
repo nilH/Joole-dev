@@ -28,12 +28,14 @@ public class Product {
     @Column(name = "model_year")
     private LocalDateTime modelYear;
     @NotNull
+    @Column(name = "brand")
     private String brand;
     @NotNull
+    @Column(name = "certificate")
     private String certificate;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @NotNull
+    @JoinColumn(name = "category")
+    private String category;
     @NotNull
     //type is used for search. like "HVAC fans"
     private String type;
@@ -41,9 +43,8 @@ public class Product {
     @JoinColumn (name = "product_info_id")
     private ProductInfo productInfo;
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer;
+    @JoinColumn(name = "manufacturer")
+    private String manufacturer;
     @OneToMany(mappedBy = "product",cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<ProductType> productTypeList;
@@ -51,11 +52,11 @@ public class Product {
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<TechnicalSpecs> technicalSpecsList;
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -99,11 +100,11 @@ public class Product {
         this.timeCreated = timeCreated;
     }
 
-    public Manufacturer getManufacturer() {
+    public String getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
+    public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
