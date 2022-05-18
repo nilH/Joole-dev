@@ -39,11 +39,11 @@ public class User {
     private LocalDateTime timeCreated;
 
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="user",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> project;
+//    @OneToMany(fetch=FetchType.LAZY,
+//            mappedBy="user",
+//            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//                    CascadeType.DETACH, CascadeType.REFRESH})
+//    private List<Project> project;
 
 
     public int getId() {
@@ -86,13 +86,13 @@ public class User {
         this.timeCreated = timeCreated;
     }
 
-    public List<Project> getProject() {
-        return project;
-    }
-
-    public void setProject(List<Project> project) {
-        this.project = project;
-    }
+//    public List<Project> getProject() {
+//        return project;
+//    }
+//
+//    public void setProject(List<Project> project) {
+//        this.project = project;
+//    }
 
 
 }
