@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import java.com.demo1.jooletest.Entity.ProductInfo;
 
 @Repository
-public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
-
+public interface ProductInfoRepository extends JpaRepository<ProductInfo, Integer> {
+    ProductInfo findById(int id);
 }
