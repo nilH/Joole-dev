@@ -1,12 +1,11 @@
 package com.itlize.Joole.service;
 
 import com.itlize.Joole.entity.Product;
-import com.itlize.Joole.entity.ProductType;
-import com.itlize.Joole.entity.TechnicalSpecs;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProductSearch {
-    public List<Product> searchByName(String name,int categoryId);
-    public List<Product> filterByTypeAndSpecs(List<ProductType> productTypeList, List<TechnicalSpecs> technicalSpecsList);
+    List<Product> searchByName(String name);
+    List<Product> filter(String userType, String application, String mountingLocation, String accessories, LocalDateTime modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height);
 }

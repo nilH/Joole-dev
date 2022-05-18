@@ -23,12 +23,6 @@ public class Project {
     private LocalDateTime timeCreated;
 
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="project",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<ProjectProduct> projectProduct;
-
 
 
     public String getProjectName() {
@@ -56,13 +50,6 @@ public class Project {
     }
 
 
-    public List<ProjectProduct> getProjectProduct() {
-        return projectProduct;
-    }
-
-    public void setProjectProduct(List<ProjectProduct> projectProduct) {
-        this.projectProduct = projectProduct;
-    }
 
 
 }
