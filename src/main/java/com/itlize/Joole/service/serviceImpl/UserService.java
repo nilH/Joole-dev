@@ -3,7 +3,9 @@ package com.itlize.Joole.service.serviceImpl;
 import com.itlize.Joole.entity.User;
 import com.itlize.Joole.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserService{
 
     @Autowired UserRepository userR;

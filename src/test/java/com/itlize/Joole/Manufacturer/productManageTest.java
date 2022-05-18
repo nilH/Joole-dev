@@ -26,7 +26,7 @@ public class productManageTest {
     @Test
     public void addProduct() throws Exception{
         Product product=new Product();
-        product.setProductName("productnameforsearch");
+        product.setProductName("productnamefortest");
         product.setBrand("brand");
         product.setType("searchType");
         product.setCertificate("certificate");
