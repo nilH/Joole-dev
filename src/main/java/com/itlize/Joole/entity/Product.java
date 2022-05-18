@@ -18,7 +18,9 @@ public class Product {
     @NotNull
     @Column(name="product_name")
     private String productName;
-
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "project_product",joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private Set<Project> projectSet=new HashSet<>();
     @NotNull
     @Column(name="time_created")
     private LocalDateTime timeCreated;
@@ -30,12 +32,14 @@ public class Product {
 
     private String certificate;
 
+
+    private String category;
     @NotNull
     //type is used for search. like "HVAC fans"
     private String type;
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn (name = "product_info_id")
-//    private ProductInfo productInfo;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "product_info_id")
+    private ProductInfo productInfo;
 
 
     private String manufacturer;
@@ -67,10 +71,14 @@ public class Product {
         this.accessories = accessories;
     }
 
+    public String getCategory() {
+        return category;
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
 
     public String getManufacturer() {
         return manufacturer;
@@ -149,6 +157,7 @@ public class Product {
         this.productId = productId;
     }
 
+
     public LocalDateTime getModelYear() {
         return modelYear;
     }
@@ -166,13 +175,14 @@ public class Product {
     }
 
 
-//    public ProductInfo getProductInfo() {
-//        return productInfo;
-//    }
-//
-//    public void setProductInfo(ProductInfo productInfo) {
-//        this.productInfo = productInfo;
-//    }
+
+    public ProductInfo getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(ProductInfo productInfo) {
+        this.productInfo = productInfo;
+    }
 
     public String getProductName() {
         return productName;
@@ -205,6 +215,5 @@ public class Product {
     public void setType(String type) {
         this.type = type;
     }
-
 
 }

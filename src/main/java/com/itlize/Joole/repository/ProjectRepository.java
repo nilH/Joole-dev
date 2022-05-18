@@ -10,4 +10,6 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
 
 
+    Project findByproject_id(int id);
+
 }

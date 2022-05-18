@@ -3,7 +3,7 @@ package com.itlize.Joole.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="project")
@@ -22,6 +22,12 @@ public class Project {
     @Column(name="time_created")
     private LocalDateTime timeCreated;
 
+
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="project",
+            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private Set<ProjectProduct> projectProduct;
 
 
 
@@ -50,6 +56,13 @@ public class Project {
     }
 
 
+    public Set<ProjectProduct> getProjectProduct() {
+        return projectProduct;
+    }
+
+    public void setProjectProduct(Set<ProjectProduct> projectProduct) {
+        this.projectProduct = projectProduct;
+    }
 
 
 }
