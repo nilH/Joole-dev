@@ -23,7 +23,7 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="customer_id")
-    private int id;
+    private Integer id;
 
     @Column(name="pwd")
     private String password;
