@@ -27,6 +27,7 @@ public class Project {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="customer_id")
     private User user;
+
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,

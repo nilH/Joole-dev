@@ -11,6 +11,7 @@ public interface ProjectProductRepository extends JpaRepository<ProjectProduct,I
 
     Optional<ProjectProduct> findByProject (Project project);
 
-
     Optional<ProjectProduct> findByProduct(Product product);
+
+
 }
