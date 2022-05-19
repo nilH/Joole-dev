@@ -22,11 +22,12 @@ public class Product {
             mappedBy="product",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private final Set<ProjectProduct> projectProductSet = new HashSet<>();
+    private Set<ProjectProduct> projectProductSet = new HashSet<>();
 
     @NotNull
     @Column(name="time_created")
     private LocalDateTime timeCreated;
+
     @NotNull
     @Column(name = "model_year")
     private LocalDateTime modelYear;
@@ -219,5 +220,14 @@ public class Product {
     public void setType(String type) {
         this.type = type;
     }
+
+    public void setProjectProductSet(Set<ProjectProduct> set) {
+        this.projectProductSet = set;
+    }
+
+    public Set<ProjectProduct> getProjectProductSet() {
+        return projectProductSet;
+    }
+
 
 }
