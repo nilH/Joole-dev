@@ -14,7 +14,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
     private int productId;
-    @NotNull
+
     @Column(name="product_name")
     private String productName;
 
@@ -24,21 +24,21 @@ public class Product {
                     CascadeType.DETACH, CascadeType.REFRESH})
     private Set<ProjectProduct> projectProductSet = new HashSet<>();
 
-    @NotNull
+
     @Column(name="time_created")
     private LocalDateTime timeCreated;
 
-    @NotNull
+
     @Column(name = "model_year")
     private LocalDateTime modelYear;
-    @NotNull
+
     private String brand;
 
     private String certificate;
 
 
     private String category;
-    @NotNull
+
     //type is used for search. like "HVAC fans"
     private String type;
     @OneToOne(cascade = CascadeType.ALL)

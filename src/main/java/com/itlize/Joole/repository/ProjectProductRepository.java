@@ -13,6 +13,5 @@ public interface ProjectProductRepository extends JpaRepository<ProjectProduct,I
 
     Optional<ProjectProduct> findByProduct(Product product);
 
-    @Override
-    <S extends ProjectProduct> S save(S entity);
+
 }
