@@ -28,7 +28,7 @@ public class User {
     @Column(name="pwd")
     private String password;
 
-    @Column(name="customer_name")
+    @Column(name="customer_name",unique = true,nullable = true)
     private String name;
 
     @Column(name="time_updated")
@@ -39,12 +39,14 @@ public class User {
     private LocalDateTime timeCreated;
 
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="user",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> project;
+//    @OneToMany(fetch=FetchType.LAZY,
+//            mappedBy="user",
+//            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//                    CascadeType.DETACH, CascadeType.REFRESH})
+//    private List<Project> project;
 
+    @Column(nullable = true)
+    private String role;
 
     public int getId() {
         return id;
@@ -60,6 +62,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {

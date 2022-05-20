@@ -1,9 +1,17 @@
 package com.itlize.Joole.controller;
 //login register logout
 
-import com.itlize.Joole.service.serviceImpl.UserService;
-
+import com.itlize.Joole.entity.User;
+import com.itlize.Joole.service.UserService;
+import com.itlize.Joole.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,32 +19,39 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
 
     @PostMapping("/login")
-    public int login(@RequestParam("username") String username,
-                     @RequestParam("password") String password)
+    public ResponseEntity<?> login(@RequestParam("username") String username,
+                     @RequestParam("password") String password) throws Exception
     {
-        this.service.login(username, password);
-
-        return 1;
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
+        }catch (BadCredentialsException e){
+            throw new Exception("Incorrect username or password",e);
+        }
+        final UserDetails userDetails=userDetailsService.loadUserByUsername(username);
+        final String jwt=jwtUtil.generateToken(userDetails);
+        return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public int register(@RequestParam("username") String username,
-                     @RequestParam("password") String password)
+    public ResponseEntity<?> register(@RequestBody User user)
     {
-        this.service.register(username, password);
-
-        return 1;
-    }
-
-    @PostMapping("/logout")
-    public int logout(@RequestParam("username") String username)
-    {
-        this.service.logout(username);
-
-        return 1;
+        if(userService.findByUsername(user.getName())!=null){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        user.setRole("User");
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
     
 
