@@ -21,6 +21,14 @@ public class ProjectProduct {
     private Project project;
 
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
     public Product getProduct() {
         return product;
     }

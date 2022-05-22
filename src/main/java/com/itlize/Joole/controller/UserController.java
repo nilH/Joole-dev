@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -30,7 +32,7 @@ public class UserController {
     private UserDetailsService userDetailsService;
 
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<?> login(@RequestParam("username") String username,
                      @RequestParam("password") String password) throws Exception
     {
@@ -50,8 +52,12 @@ public class UserController {
         if(userService.findByUsername(user.getName())!=null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        user.setRole("User");
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+        User user1=new User();
+        user1.setPassword(user.getPassword());
+        user1.setName(user.getName());
+        user1.setTimeCreated(LocalDateTime.now());
+        user1.setRole("User");
+        return new ResponseEntity<>(userService.saveUser(user1), HttpStatus.CREATED);
     }
     
 

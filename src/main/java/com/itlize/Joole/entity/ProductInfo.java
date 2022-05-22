@@ -10,7 +10,7 @@ public class ProductInfo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="productInfo_id")
-    private Integer productInfo_id;
+    private Integer productInfoId;
 
 
     @OneToOne(mappedBy="productInfo",
@@ -18,8 +18,9 @@ public class ProductInfo {
                     CascadeType.REFRESH})
     private Product product;
 
+
     @Column(name="product_details")
-    private String product_details;
+    private String productDetails;
 
     @Column(name="contact")
     private String contact;
@@ -40,26 +41,21 @@ public class ProductInfo {
 
     }
 
-    public ProductInfo(String product_details, String contact,String documentation) {
-        this.product_details = product_details;
-        this.contact = contact;
-        this.documentation = documentation;
+
+    public Integer getProductInfoId() {
+        return productInfoId;
     }
 
-    public int getId() {
-        return productInfo_id;
+    public void setProductInfoId(Integer productInfoId) {
+        this.productInfoId = productInfoId;
     }
 
-    public void setId(int productInfo_id) {
-        this.productInfo_id = productInfo_id;
+    public String getProductDetails() {
+        return productDetails;
     }
 
-    public String getProductdetails() {
-        return product_details;
-    }
-
-    public void setProductdetails(String product_details) {
-        this.product_details = product_details;
+    public void setProductDetails(String productDetails) {
+        this.productDetails = productDetails;
     }
 
     public String getContact() {

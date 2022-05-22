@@ -13,7 +13,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
-    private int productId;
+    private Integer productId;
 
     @Column(name="product_name")
     private String productName;
@@ -154,14 +154,14 @@ public class Product {
         this.userType = userType;
     }
 
-    public int getProductId() {
+
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
-
 
     public LocalDateTime getModelYear() {
         return modelYear;
