@@ -1,4 +1,4 @@
-package com.itlize.Joole.userTest;
+package com.itlize.Joole.integrationTest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

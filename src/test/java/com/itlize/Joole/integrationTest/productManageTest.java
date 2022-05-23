@@ -1,4 +1,4 @@
-package com.itlize.Joole.Manufacturer;
+package com.itlize.Joole.integrationTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;

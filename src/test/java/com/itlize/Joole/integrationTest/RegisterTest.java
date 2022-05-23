@@ -1,4 +1,4 @@
-package com.itlize.Joole.userTest;
+package com.itlize.Joole.integrationTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itlize.Joole.entity.User;
@@ -21,7 +21,7 @@ public class RegisterTest {
     public void register() throws Exception{
 
         User user=new User();
-        user.setName("username");
+        user.setName("username1");
         user.setPassword("password");
         user.setId(1);
         mockMvc.perform(post("/user/register").contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(user

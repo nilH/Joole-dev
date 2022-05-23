@@ -1,4 +1,4 @@
-package com.itlize.Joole.userTest;
+package com.itlize.Joole.integrationTest;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -24,7 +24,7 @@ public class LoginTest {
     @Test
     public void login() throws Exception{
 
-        String username = "username";
+        String username = "username1";
         String password = "password";
 
 

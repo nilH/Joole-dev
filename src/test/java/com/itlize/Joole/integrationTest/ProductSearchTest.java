@@ -1,4 +1,4 @@
-package com.itlize.Joole.searchTest;
+package com.itlize.Joole.integrationTest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

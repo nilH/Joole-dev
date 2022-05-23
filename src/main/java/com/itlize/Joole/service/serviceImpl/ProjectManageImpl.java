@@ -6,6 +6,7 @@ import com.itlize.Joole.entity.ProjectProduct;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
+import com.itlize.Joole.service.ProjectManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class ProjectManage {
+public class ProjectManageImpl implements ProjectManage {
 
     @Autowired
     ProjectRepository projectRep;

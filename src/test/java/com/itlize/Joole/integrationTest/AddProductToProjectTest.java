@@ -1,4 +1,4 @@
-package com.itlize.Joole.projectTest;
+package com.itlize.Joole.integrationTest;
 
 import com.itlize.Joole.entity.Project;
 import org.junit.jupiter.api.Test;
