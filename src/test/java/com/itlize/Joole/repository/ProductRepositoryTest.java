@@ -53,4 +53,16 @@ public class ProductRepositoryTest {
         List<Product> productList=productRepository.findByUserTypeAndApplicationAndMountingLocationAndAccessoriesAndModelYearAndAirflowAndMaxPowerAndSoundAtMaxSpeedAndFanSweepDiameterAndHeight("usertype","application","mountinglocation","accessories",2022,2,2,2,2,2);
         assert(productList.size()>0);
     }
+
+    @Test
+    public void deleteProduct(){
+        String type="fans";
+        Product product=new Product();
+        product.setProductName("HVAC88811");
+        product.setType(type);
+        productRepository.save(product);
+        productRepository.delete(product);
+        List<Product> productList=productRepository.findByTypeIgnoreCaseContaining("fan");
+        assert(productList.size()==0);
+    }
 }

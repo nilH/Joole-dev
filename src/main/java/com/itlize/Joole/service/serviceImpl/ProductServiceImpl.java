@@ -18,4 +18,9 @@ public class ProductServiceImpl implements ProductService {
         product.setTimeCreated(LocalDateTime.now());
         return productRepository.save(product).getProductId();
     }
+
+    @Override
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
+    }
 }
