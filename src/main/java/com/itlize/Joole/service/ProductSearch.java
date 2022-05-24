@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProductSearch {
     List<Product> searchByName(String name);
-    List<Product> filter(String userType, String application, String mountingLocation, String accessories, LocalDateTime modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height);
+    List<Product> filter(String userType, String application, String mountingLocation, String accessories, int modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height);
 }

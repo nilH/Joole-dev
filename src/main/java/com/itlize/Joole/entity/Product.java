@@ -30,7 +30,7 @@ public class Product {
 
 
     @Column(name = "model_year")
-    private LocalDateTime modelYear;
+    private Integer modelYear;
 
     private String brand;
 
@@ -40,6 +40,7 @@ public class Product {
     private String category;
 
     //type is used for search. like "HVAC fans"
+    @Column(nullable = false)
     private String type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
@@ -163,11 +164,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public LocalDateTime getModelYear() {
+    public Integer getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(LocalDateTime modelYear) {
+    public void setModelYear(Integer modelYear) {
         this.modelYear = modelYear;
     }
 

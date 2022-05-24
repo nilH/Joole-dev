@@ -30,7 +30,7 @@ public class productManageTest {
         product.setBrand("brand");
         product.setType("searchType");
         product.setCertificate("certificate");
-        product.setModelYear(LocalDateTime.of(2022,1,1,0,0));
+        product.setModelYear(2012);
         product.setAirflow(1);
         product.setApplication("application");
         product.setHeight(1);

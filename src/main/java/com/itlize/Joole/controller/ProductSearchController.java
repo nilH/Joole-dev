@@ -24,7 +24,7 @@ public class ProductSearchController {
     }
 
     @GetMapping(value = "/product_filter")
-    public List<Product> productFilter(String userType, String application, String mountingLocation, String accessories, LocalDateTime modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height){
-        return productSearchService.filter(userType,  application,  mountingLocation,  accessories,  modelYear,  airflow,  maxPower,  soundAtMaxSpeed,  fanSweepDiameter,  height);
+    public List<Product> productFilter(String userType, String application, String mountingLocation, String accessories, String modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height){
+        return productSearchService.filter(userType,  application,  mountingLocation,  accessories,  Integer.parseInt(modelYear),  airflow,  maxPower,  soundAtMaxSpeed,  fanSweepDiameter,  height);
     }
 }
