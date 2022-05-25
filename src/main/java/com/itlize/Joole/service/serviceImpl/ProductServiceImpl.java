@@ -2,19 +2,27 @@ package com.itlize.Joole.service.serviceImpl;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
+import com.itlize.Joole.entity.ProjectProduct;
 import com.itlize.Joole.repository.ProductRepository;
+import com.itlize.Joole.repository.ProjectProductRepository;
+import com.itlize.Joole.repository.ProjectRepository;
 import com.itlize.Joole.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    ProjectProductRepository projectProductRepository;
+
     @Override
     public int addProduct(Product product) {
         product.setTimeCreated(LocalDateTime.now());
@@ -24,6 +32,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int deleteProduct(Product product) {
         productRepository.delete(product);
+        for(ProjectProduct projectProduct:product.getProjectProductSet()){
+            projectProductRepository.delete(projectProduct);
+        }
         return 0;
     }
 
@@ -40,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    //leave for further requirements
     @Override
     public int updateProduct(Product product,int productId) {
         Product product1=productRepository.findById(productId).orElse(null);
@@ -49,23 +61,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int findById(Integer productId) {
-        return 0;
+    public Product findById(Integer productId) {
+        return productRepository.findById(productId).orElse(null);
     }
 
     @Override
     public List<Product> findAllProduct() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public List<Product> findByName(String productName) {
-        return null;
+        return productRepository.findByProductName(productName);
     }
 
     @Override
     public List<Project> getProjectFromProduct(Product product) {
-        return null;
+        List<ProjectProduct> projectProductList=projectProductRepository.findByProduct(product);
+        List<Project> projectList=new ArrayList<>();
+        for(ProjectProduct projectProduct:projectProductList){
+            projectList.add(projectProduct.getProject());
+        }
+        return projectList;
     }
 
 }

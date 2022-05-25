@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,6 +78,16 @@ public class UserServiceTest {
         assertEquals(userList1,userList);
     }
 
+    @Test
+    public void updateUser(){
+        User user=new User();
+        user.setName("username");
+        User user1=new User();
+        user1.setName("username");
+        Mockito.when(userRepository.findByName("username")).thenReturn(Optional.of(user1));
+        userService.update("username",user);
+        assert(user1.getTimeUpdated()!=null);
+    }
 
 
 

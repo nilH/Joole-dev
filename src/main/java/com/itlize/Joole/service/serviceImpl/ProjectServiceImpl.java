@@ -55,4 +55,34 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Product> getProductFromProject(int projectId) {
         return null;
     }
+
+    @Override
+    public void addProject(Project project) {
+
+    }
+
+    @Override
+    public void deleteProject(Project project) {
+
+    }
+
+    @Override
+    public void updateProject(Project project, Integer projectId) {
+
+    }
+
+    @Override
+    public List<Project> findAllProject() {
+        return null;
+    }
+
+    @Override
+    public Project findById(Integer projectId) {
+        return null;
+    }
+
+    @Override
+    public List<Project> findByName(String projectName) {
+        return null;
+    }
 }
