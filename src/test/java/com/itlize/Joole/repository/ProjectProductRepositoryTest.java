@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,7 @@ class ProjectProductRepositoryTest {
         projectProduct.setProduct(product);
         projectProduct.setProject(project);
         ppRepository.save(projectProduct);
-        Optional<ProjectProduct> pp = ppRepository.findByProject(projectReturn);
+        List<ProjectProduct> pp = ppRepository.findByProject(projectReturn);
 
         assertThat(pp).isNotEmpty();
 
@@ -60,7 +61,7 @@ class ProjectProductRepositoryTest {
         projectProduct.setProduct(product);
         projectProduct.setProject(project);
         ppRepository.save(projectProduct);
-        Optional<ProjectProduct> pp = ppRepository.findByProduct(productReturn);
+        List<ProjectProduct> pp = ppRepository.findByProduct(productReturn);
 
         assertThat(pp).isNotEmpty();
 
