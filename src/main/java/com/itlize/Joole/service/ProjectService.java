@@ -12,15 +12,11 @@ public interface ProjectService {
     int deleteProductFromProject(int productId, int projectId);
     List<Product> getProductFromProject(int projectId);
 
-    void addProject(Project project);
-
-    void deleteProject(Project project);
-
-    void updateProject(Project project, Integer projectId);
-
+    //crud
+    int createProject(Project project);
     List<Project> findAllProject();
 
-    Project findById(Integer projectId);
-
     List<Project> findByName(String projectName);
+    int updateProject(Project projuct, int projectId);
+    int deleteProject(Project project);
 }

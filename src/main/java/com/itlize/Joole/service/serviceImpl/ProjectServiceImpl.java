@@ -10,9 +10,8 @@ import com.itlize.Joole.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -31,11 +30,22 @@ public class ProjectServiceImpl implements ProjectService {
         Product product=productRepository.findById(productId).orElse(null);
         Project project = projectRep.findById(projectId).orElse(null);
 
+        if(product == null || project ==null)
+        {
+            return 0;
+        }
+
         ProjectProduct pp = new ProjectProduct();
         pp.setProduct(product);
         pp.setProject(project);
 
-        ppRepository.save(pp);
+        try {
+            ppRepository.save(pp);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return 0;
+        }
 
         ppSet.add(pp);
 
@@ -48,41 +58,114 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public int deleteProductFromProject(int productId, int projectId) {
-        return 0;
+
+        Project project = projectRep.findById(projectId).orElse(null);
+        Product product=productRepository.findById(productId).orElse(null);
+
+        if(product == null || project ==null)
+        {
+            return 0;
+        }
+
+        List<ProjectProduct> ppList = ppRepository.findByProject(project);
+
+        Iterator<ProjectProduct> it = ppList.iterator();  // Traverse the set
+
+        while (it.hasNext()) {               // Delete every related ProjectProducts
+            ProjectProduct pp = it.next();
+            if(pp.getProduct().getProductId() == productId)
+            {
+                simpleDeleteProjectProduct(pp);     // This is a method in this class
+            }
+        }
+
+        project.setProjectProduct(null);
+        product.setProjectProductSet(null);
+
+        return 1;
     }
 
     @Override
     public List<Product> getProductFromProject(int projectId) {
-        return null;
+
+        List<Product> output = new ArrayList<Product>();
+
+        Project project = projectRep.findById(projectId).orElse(null);
+
+        if(project ==null)
+        {
+            return null;
+        }
+
+        List<ProjectProduct> ppList = ppRepository.findByProject(project);
+
+        Iterator<ProjectProduct> it = ppList.iterator();  // Traverse the set
+
+        while (it.hasNext()) {
+            ProjectProduct pp = it.next();
+            output.add(pp.getProduct());     // Add every product
+        }
+
+        return output;
     }
 
-    @Override
-    public void addProject(Project project) {
+    public int createProject(Project project)
+    {
+        if(projectRep.findByProjectName(project.getProjectName()) != null)
+        {
+            return -1;
+        }
 
+        project.setTimeCreated(LocalDateTime.now());
+
+        return projectRep.save(project).getId();
     }
 
-    @Override
-    public void deleteProject(Project project) {
-
+    public List<Project> findAllProject()
+    {
+        return projectRep.findAll();
     }
 
-    @Override
-    public void updateProject(Project project, Integer projectId) {
-
+    public List<Project> findByName(String projectName)
+    {
+        return projectRep.findByProjectName(projectName);
     }
 
-    @Override
-    public List<Project> findAllProject() {
-        return null;
+    public int updateProject(Project project, int projectId)
+    {
+        Project project1=projectRep.findById(projectId).orElse(null);
+
+        if(project1 == null)
+        {
+            return 0;
+        }
+
+        project1.setProjectName(project.getProjectName());
+        return 1;
     }
 
-    @Override
-    public Project findById(Integer projectId) {
-        return null;
+    public int deleteProject(Project project)
+    {
+        if(projectRep.findByProjectName(project.getProjectName()) == null)
+        {
+            return 0;
+        }
+
+        simpleDeleteProject(project);  // This is a method in this class
+
+        return 1;
     }
 
-    @Override
-    public List<Project> findByName(String projectName) {
-        return null;
+    public int simpleDeleteProject(Project project)   // To the facilitate unit testing
+    {
+        projectRep.delete(project);
+        return 1;
     }
+
+    public int simpleDeleteProjectProduct(ProjectProduct pp) // To the facilitate unit testing
+    {
+        ppRepository.delete(pp);
+        return 1;
+    }
+
 }
