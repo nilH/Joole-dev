@@ -22,14 +22,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Product product) {
-        productRepository.delete(product);
-    }
-
-    @Override
     public int deleteProduct(Product product) {
+        productRepository.delete(product);
         return 0;
     }
+
+
 
     @Override
     public List<Product> searchByType(String name) {
@@ -37,9 +35,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> filter(String userType, String application, String mountingLocation, String accessories, LocalDateTime modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height) {
+    public List<Product> filter(String userType, String application, String mountingLocation, String accessories, int modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height) {
         return productRepository.findByUserTypeAndApplicationAndMountingLocationAndAccessoriesAndModelYearAndAirflowAndMaxPowerAndSoundAtMaxSpeedAndFanSweepDiameterAndHeight( userType,  application,  mountingLocation,  accessories,  modelYear,  airflow,  maxPower,  soundAtMaxSpeed,  fanSweepDiameter,  height);
     }
+
 
     @Override
     public int updateProduct(Product product,int productId) {

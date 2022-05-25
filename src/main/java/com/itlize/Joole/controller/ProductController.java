@@ -3,11 +3,10 @@ package com.itlize.Joole.controller;
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/product")
 public class ProductController {
     @Autowired
     ProductService manufacturerManage;
@@ -15,4 +14,7 @@ public class ProductController {
     public void addProduct(@RequestBody Product product){
         manufacturerManage.addProduct(product);
     }
+
+
+
 }
