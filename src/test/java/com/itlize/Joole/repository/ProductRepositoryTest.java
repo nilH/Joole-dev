@@ -1,6 +1,8 @@
 package com.itlize.Joole.repository;
 
 import com.itlize.Joole.entity.Product;
+import com.itlize.Joole.entity.Project;
+import com.itlize.Joole.entity.ProjectProduct;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,8 +16,12 @@ import java.util.List;
 public class ProductRepositoryTest {
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    ProjectRepository projectRepository;
+    @Autowired
+    ProjectProductRepository projectProductRepository;
     @Test
-    public void addProduct(){
+    public void createProduct(){
         Product product=new Product();
         product.setProductName("productName");
 
@@ -65,4 +71,21 @@ public class ProductRepositoryTest {
         List<Product> productList=productRepository.findByTypeIgnoreCaseContaining("fan");
         assert(productList.size()==0);
     }
+    @Test
+    public void findById(){
+        Product product=new Product();
+        product.setProductName("productName");
+        Product product1=productRepository.save(product);
+        assert (productRepository.findById(product1.getProductId()).orElse(null)!=null);
+    }
+
+    @Test
+    public void findByName(){
+        Product product=new Product();
+        product.setProductName("productName");
+        product.setType("type");
+        Product product1=productRepository.save(product);
+        assert (productRepository.findByProductName(product1.getProductName()).size()>0);
+    }
+
 }

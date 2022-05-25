@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,17 +34,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean create(User user) {
-        try{
-            userRepository.save(user);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean delete(User user) {
         if(user==null){
             return false;
@@ -52,15 +42,13 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    //update password. leave for further requirements
     @Override
     public boolean update(String userName, User user) {
-        User toUpdate=userRepository.findByName(userName).orElse(null);
-        if(toUpdate==null){
-            return false;
-        }
-        toUpdate.setName(user.getName());
         try{
-            userRepository.save(toUpdate);
+            User toUpdate=userRepository.findByName(userName).orElse(null);
+            toUpdate.setTimeUpdated(LocalDateTime.now());
+            toUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
         }catch (Exception e){
             System.out.println(e.getMessage());
             return false;
@@ -69,7 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void clear() {
+    public void deleteAllUser() {
         userRepository.deleteAll();
     }
 }

@@ -43,7 +43,7 @@ public class productManageTest {
         product.setAccessories("accessories");
         product.setType("nameforsearch");
         ObjectMapper objectMapper= JsonMapper.builder().addModule(new JavaTimeModule()).build();
-        mockMvc.perform(post("/manufacturer/add_product").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(product)));
+        mockMvc.perform(post("/add_product").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(product)));
     }
 
 

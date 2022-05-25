@@ -9,8 +9,7 @@ public interface UserService {
     User saveUser(User user);
     User findByUsername(String username);
     List<User> findAllUsers();
-    boolean create(User user);
     boolean delete(User user);
     boolean update(String userName, User user);
-    void clear();
+    void deleteAllUser();
 }
