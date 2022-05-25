@@ -23,38 +23,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     ProjectProductRepository ppRepository;
 
-    @Override
-    public int addProject(Project project){
-        return 1;
-
-    }
-    @Override
-    public int deleteProject(Project project){
-        return 1;
-    }
-
-    @Override
-    public int updateProject(Project project,Integer projectId) {
-
-        return 0;
-    }
-
-    @Override
-    public Project findById(Integer projectId) {
-        return null;
-    }
-
-    @Override
-    public List<Project> findAllProject() {
-        return null;
-    }
-
-    @Override
-    public List<Project> findByName(String projectName) {
-        return null;
-    }
-
-
 
     @Override
     public int addProductToProject(int productId, int projectId)

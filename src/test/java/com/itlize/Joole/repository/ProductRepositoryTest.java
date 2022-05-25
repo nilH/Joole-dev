@@ -33,7 +33,7 @@ public class ProductRepositoryTest {
     public void searchByType(){
         String type="fans";
         Product product=new Product();
-        product.setProductName("HVAC88811");
+        product.setProductName("HVAC8h8811");
         product.setType(type);
         productRepository.save(product);
         List<Product> productList =productRepository.findByTypeIgnoreCaseContaining("fan");
@@ -64,7 +64,7 @@ public class ProductRepositoryTest {
     public void deleteProduct(){
         String type="fans";
         Product product=new Product();
-        product.setProductName("HVAC88811");
+        product.setProductName("HVAC88821");
         product.setType(type);
         productRepository.save(product);
         productRepository.delete(product);
