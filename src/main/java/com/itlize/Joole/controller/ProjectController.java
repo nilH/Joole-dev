@@ -41,7 +41,7 @@ public class ProjectController {
 
     @PostMapping(value = "/add_project")
     public int addProject(@RequestBody Project project){
-        manage.addProject(project);
+        manage.createProject(project);
         return 1;
     }
 

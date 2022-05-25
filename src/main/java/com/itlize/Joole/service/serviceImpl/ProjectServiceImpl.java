@@ -57,6 +57,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Project findById(int projectId) {
+        return projectRep.findById(projectId).orElse(null);
+    }
+
+    @Override
     public int deleteProductFromProject(int productId, int projectId) {
 
         Project project = projectRep.findById(projectId).orElse(null);
@@ -111,7 +116,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     public int createProject(Project project)
     {
-        if(projectRep.findByProjectName(project.getProjectName()) != null)
+        if(projectRep.findByProjectName(project.getProjectName()).size()>0)
         {
             return -1;
         }
@@ -146,7 +151,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     public int deleteProject(Project project)
     {
-        if(projectRep.findByProjectName(project.getProjectName()) == null)
+        if(projectRep.findById(project.getId()).isEmpty())
         {
             return 0;
         }
@@ -159,6 +164,9 @@ public class ProjectServiceImpl implements ProjectService {
     public int simpleDeleteProject(Project project)   // To the facilitate unit testing
     {
         projectRep.delete(project);
+        for(ProjectProduct projectProduct:project.getProjectProduct()){
+            ppRepository.delete(projectProduct);
+        }
         return 1;
     }
 

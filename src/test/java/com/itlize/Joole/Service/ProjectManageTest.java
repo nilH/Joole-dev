@@ -143,5 +143,11 @@ public class ProjectManageTest {
         assertThat(projectService.deleteProject(project)).isEqualTo(1);
     }*/
 
+    @Test
+    public void findById(){
+        when(projectRep.findById(2)).thenReturn(Optional.of(project));
+        Project project2=projectServiceImp.findById(2);
+        assert (project2.getId()==2);
+    }
 
 }

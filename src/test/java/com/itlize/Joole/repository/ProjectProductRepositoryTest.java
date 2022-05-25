@@ -49,7 +49,6 @@ class ProjectProductRepositoryTest {
 
     @Test
     void findByProduct() {
-
         Project project=new Project();
         project.setProjectName("projectname");
         Project projectReturn=projectRepository.save(project);
@@ -64,6 +63,23 @@ class ProjectProductRepositoryTest {
         List<ProjectProduct> pp = ppRepository.findByProduct(productReturn);
 
         assertThat(pp).isNotEmpty();
+
+    }
+
+    @Test
+    public void saveProjectProduct(){
+        Project project=new Project();
+        project.setProjectName("projectname");
+        Project projectReturn=projectRepository.save(project);
+        Product product=new Product();
+        product.setProductName("productname");
+        product.setType("type");
+        Product productReturn=productRepository.save(product);
+        ProjectProduct projectProduct=new ProjectProduct();
+        projectProduct.setProduct(product);
+        projectProduct.setProject(project);
+        ppRepository.save(projectProduct);
+        assert (ppRepository.findById(projectProduct.getId()).isPresent());
 
     }
 }

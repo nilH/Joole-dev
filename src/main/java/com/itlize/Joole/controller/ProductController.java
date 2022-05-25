@@ -64,7 +64,7 @@ public class ProductController {
         return result;
     }
 
-    @GetMapping(value = "/findby_productname")
+    @GetMapping(value = "/get_project_from_product")
     public List<Project> getProjectFromProduct(@RequestBody Product product){
         List<Project> result = productService.getProjectFromProduct(product);
         return result;

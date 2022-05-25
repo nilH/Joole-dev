@@ -11,7 +11,7 @@ public interface ProjectService {
 
     int deleteProductFromProject(int productId, int projectId);
     List<Product> getProductFromProject(int projectId);
-
+    Project findById(int projectId);
     //crud
     int createProject(Project project);
     List<Project> findAllProject();
