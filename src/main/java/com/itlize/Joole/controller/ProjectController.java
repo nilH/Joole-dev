@@ -4,21 +4,19 @@ package com.itlize.Joole.controller;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
-import com.itlize.Joole.entity.ProjectProduct;
+import com.itlize.Joole.service.ProjectService;
 import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
 
     @Autowired
-    private ProjectServiceImpl manage;
+    private ProjectService manage;
 
     @PostMapping("/add_product_to_project")
     public int addProductToProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
@@ -43,7 +41,7 @@ public class ProjectController {
 
     @PostMapping(value = "/add_project")
     public int addProject(@RequestBody Project project){
-        manage.addProject(project);
+        manage.createProject(project);
         return 1;
     }
 

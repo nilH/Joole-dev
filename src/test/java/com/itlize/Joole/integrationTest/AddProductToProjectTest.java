@@ -18,7 +18,7 @@ public class AddProductToProjectTest {
 
     @Test
     public void register() throws Exception{
-
+        new LoginTest().login();
 
         String productId = "3";
         String projectId = "1";

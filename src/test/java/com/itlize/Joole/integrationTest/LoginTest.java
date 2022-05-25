@@ -38,9 +38,9 @@ public class LoginTest {
         ObjectMapper objectMapper= new ObjectMapper();
         MvcResult mvcResult=mockMvc.perform(get("/user/login").param("username",username).param("password",password))
                 .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=ISO-8859-1"))).andReturn();
-        String token=objectMapper.readValue(mvcResult.getResponse().getContentAsString(),String.class);
-        Files.writeString(Path.of("src/test/resources/jwtToken"),token,
-                StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+        String token=mvcResult.getResponse().getContentAsString();
+        Files.writeString(Path.of("src/test/resources/jwt"),token,
+                StandardCharsets.ISO_8859_1, StandardOpenOption.WRITE);
     }
 
 

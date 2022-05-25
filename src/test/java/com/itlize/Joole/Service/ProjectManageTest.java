@@ -8,6 +8,7 @@ import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
 import com.itlize.Joole.service.MyUserDetailService;
+import com.itlize.Joole.service.ProjectService;
 import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,12 +36,18 @@ public class ProjectManageTest {
 
     @Autowired
     @InjectMocks
-    private ProjectServiceImpl projectManage;
+    private ProjectServiceImpl projectServiceImp;
     private Product product;
 
     private Project project;
 
-    ProjectProduct pp;
+
+    private ProjectProduct pp;
+
+    private List<Product> listOfProduct;
+    private List<Project> listOfProject;
+
+    private List<ProjectProduct> listOfPP;
 
     @BeforeEach
     public void setUp() {
@@ -51,6 +55,7 @@ public class ProjectManageTest {
         product = new Product();
         product.setProductName("A");
         product.setProductId(1);
+
         project = new Project();
         project.setProjectName("B");
         project.setId(2);
@@ -60,6 +65,14 @@ public class ProjectManageTest {
         pp.setProject(project);
         project.setProjectProduct(ppSet);
         product.setProjectProductSet(ppSet);
+
+
+        listOfProduct = new ArrayList<Product>();
+        listOfProduct.add(product);
+        listOfProject = new ArrayList<Project>();
+        listOfProject.add(project);
+        listOfPP = new ArrayList<ProjectProduct>();
+        listOfPP.add(pp);
     }
 
 
@@ -71,6 +84,70 @@ public class ProjectManageTest {
         when(projectRep.findById(any())).thenReturn(Optional.ofNullable(project));
         when(ppRepository.save(any())).thenReturn(pp);
 
-        assertThat(projectManage.addProductToProject(1,2)).isEqualTo(1);
+        assertThat(projectServiceImp.addProductToProject(1,2)).isEqualTo(1);
     }
+
+    /*@Test
+    public void deleteProductFromProjectTest()
+    {
+        when(productRepository.findById(any())).thenReturn(Optional.ofNullable(product));
+        when(projectRep.findById(any())).thenReturn(Optional.ofNullable(project));
+        when(projectServiceImpl.simpleDeleteProjectProduct(any())).thenReturn(1);
+
+        assertThat(projectService.addProductToProject(1,2)).isEqualTo(1);
+    }*/
+
+    @Test
+    public void getProductFromProjectTest()
+    {
+        when(projectRep.findById(any())).thenReturn(Optional.ofNullable(project));
+        when(ppRepository.findByProject(any())).thenReturn(listOfPP);
+
+        assertThat(projectServiceImp.getProductFromProject(2)).isEqualTo(listOfProduct);
+    }
+
+    @Test
+    public void createProjectTest()
+    {
+        when(projectRep.save(any())).thenReturn(project);
+        when(projectRep.findByProjectName(any())).thenReturn(null);
+
+        assertThat(projectServiceImp.createProject(project)).isEqualTo(2);
+    }
+
+    @Test
+    public void findAllProjectTest()
+    {
+        when(projectRep.findAll()).thenReturn(listOfProject);
+        assertThat(projectServiceImp.findAllProject()).isEqualTo(listOfProject);
+    }
+
+
+    @Test
+    public void findByNameTest()
+    {
+        when(projectRep.findByProjectName(any())).thenReturn(listOfProject);
+        assertThat(projectServiceImp.findByName("B")).isEqualTo(listOfProject);
+    }
+    /*@Test
+    public void updateProjectTest()
+    {
+        when(projectRep.findById(any())).thenReturn(project1);
+        assertThat(projectService.updateProject(project, 2)).isEqualTo(1);
+    }*/
+
+/*    @Test
+    public void deleteProject()
+    {
+        when(projectServiceImpl.simpleDeleteProject(project)).thenReturn(1);
+        assertThat(projectService.deleteProject(project)).isEqualTo(1);
+    }*/
+
+    @Test
+    public void findById(){
+        when(projectRep.findById(2)).thenReturn(Optional.of(project));
+        Project project2=projectServiceImp.findById(2);
+        assert (project2.getId()==2);
+    }
+
 }
