@@ -24,7 +24,7 @@ public class AddProductToProjectTest {
         String projectId = "1";
 
 
-        mockMvc.perform(post("/project/addProduct").param(productId, projectId));
+        mockMvc.perform(post("/project/add_Product_to_project").param(productId, projectId));
 
     }
 

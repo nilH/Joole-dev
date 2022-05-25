@@ -16,7 +16,7 @@ public class ProjectController {
     @Autowired
     private ProjectManageImpl manage;
 
-    @PostMapping("/addProduct")
+    @PostMapping("/add_Product_To_Project")
     public int addProduct(@RequestParam("productId") int productId,@RequestParam("projectId") int projectId)
     {
         manage.addProductToProject(productId, projectId);
