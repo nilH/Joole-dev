@@ -7,58 +7,43 @@ import javax.persistence.*;
 @Table(name="project_product")
 public class ProjectProduct {
 
-
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="PR_id")
-    private Integer PR_id;
+    private Integer id;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="product_id")
     private Product product;
 
-
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="project_id")
     private Project project;
 
 
-
-    @Column(name="time_created")
-    private Date time_created;
-
-    public ProjectProduct( Date time_created/*, Date time_updated*/) {
-        this.time_created = time_created;
-        //this.time_updated = time_updated;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public ProjectProduct() {
-
+    public Integer getId() {
+        return id;
     }
 
-    public Date getTime_created(){ return time_created;}
-
-    public void setTime_created(){this.time_created = time_created;}
-
-    public Product getProducts() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProducts(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-
-    public Project getProjects() {
+    public Project getProject() {
         return project;
     }
 
     public void setProject(Project project) {
         this.project = project;
     }
-
 
 
 }

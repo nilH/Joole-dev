@@ -1,10 +1,11 @@
-
 package com.itlize.Joole.repository;
+import com.itlize.Joole.entity.ProductInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.com.demo1.jooletest.Entity.ProductInfo;
+
+
+import java.util.List;
 
 @Repository
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, Integer> {
-    ProductInfo findById(int id);
 }

@@ -21,14 +21,14 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="customer_id")
-    private int id;
+    private Integer id;
 
     @Column(name="pwd")
     private String password;
 
-    @Column(name="customer_name")
+    @Column(name="customer_name",unique = true,nullable = true)
     private String name;
 
     @Column(name="time_updated")
@@ -39,18 +39,20 @@ public class User {
     private LocalDateTime timeCreated;
 
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="user",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> project;
+//    @OneToMany(fetch=FetchType.LAZY,
+//            mappedBy="user",
+//            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//                    CascadeType.DETACH, CascadeType.REFRESH})
+//    private List<Project> project;
 
+    @Column(nullable = true)
+    private String role;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,6 +62,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -86,13 +96,13 @@ public class User {
         this.timeCreated = timeCreated;
     }
 
-    public List<Project> getProject() {
-        return project;
-    }
-
-    public void setProject(List<Project> project) {
-        this.project = project;
-    }
+//    public List<Project> getProject() {
+//        return project;
+//    }
+//
+//    public void setProject(List<Project> project) {
+//        this.project = project;
+//    }
 
 
 }

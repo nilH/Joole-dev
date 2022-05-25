@@ -3,7 +3,8 @@ package com.itlize.Joole.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="project")
@@ -11,7 +12,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="project_id")
-    private int id;
+    private Integer id;
 
     @Column(name="project_name")
     private String projectName;
@@ -23,13 +24,32 @@ public class Project {
     private LocalDateTime timeCreated;
 
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="customer_id")
+    private User user;
+
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private List<ProjectProduct> projectProduct;
+    private Set<ProjectProduct> projectProduct = new HashSet<>();
 
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -56,11 +76,11 @@ public class Project {
     }
 
 
-    public List<ProjectProduct> getProjectProduct() {
+    public Set<ProjectProduct> getProjectProduct() {
         return projectProduct;
     }
 
-    public void setProjectProduct(List<ProjectProduct> projectProduct) {
+    public void setProjectProduct(Set<ProjectProduct> projectProduct) {
         this.projectProduct = projectProduct;
     }
 

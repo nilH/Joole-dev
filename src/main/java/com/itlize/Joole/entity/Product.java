@@ -5,89 +5,170 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="product",indexes = @Index(name = "lineSearch",columnList = "category,type"))
+@Table(name="product",indexes = @Index(name = "lineSearch",columnList = "type"))
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
-    private int productId;
-    @NotNull
+    private Integer productId;
+
     @Column(name="product_name")
     private String productName;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "project_product",joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private Set<Project> projectSet=new HashSet<>();
-    @NotNull
+
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="product",
+            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private Set<ProjectProduct> projectProductSet = new HashSet<>();
+
+
     @Column(name="time_created")
     private LocalDateTime timeCreated;
-    @NotNull
+
+
     @Column(name = "model_year")
-    private LocalDateTime modelYear;
-    @NotNull
+    private Integer modelYear;
+
     private String brand;
 
     private String certificate;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category_id")
-    private Category category;
-    @NotNull
+
+
+    private String category;
+
     //type is used for search. like "HVAC fans"
+    @Column(nullable = false)
     private String type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
     private ProductInfo productInfo;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer;
-    @OneToMany(mappedBy = "product",cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    private List<ProductType> productTypeList;
-    @OneToMany( mappedBy = "product",cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    private List<TechnicalSpecs> technicalSpecsList;
 
-    public Category getCategory() {
+    private String manufacturer;
+
+    @Column(name = "user_type")
+    private String userType;
+    private String application;
+    @Column(name = "mounting_location")
+    private String mountingLocation;
+
+    private double airflow;
+    @Column(name = "max_power")
+    private double maxPower;
+
+    @Column(name = "sound_at_max_speed")
+    private double soundAtMaxSpeed;
+
+    @Column(name = "fan_sweep_diameter")
+    private double fanSweepDiameter;
+    private double height;
+    private String accessories;
+
+
+    public String getAccessories() {
+        return accessories;
+    }
+
+    public void setAccessories(String accessories) {
+        this.accessories = accessories;
+    }
+
+    public String getCategory() {
         return category;
     }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
-    public int getProductId() {
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+
+    public double getAirflow() {
+        return airflow;
+    }
+
+    public void setAirflow(double airflow) {
+        this.airflow = airflow;
+    }
+
+    public double getFanSweepDiameter() {
+        return fanSweepDiameter;
+    }
+
+    public void setFanSweepDiameter(double fanSweepDiameter) {
+        this.fanSweepDiameter = fanSweepDiameter;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getMaxPower() {
+        return maxPower;
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
+    }
+
+    public double getSoundAtMaxSpeed() {
+        return soundAtMaxSpeed;
+    }
+
+    public void setSoundAtMaxSpeed(double soundAtMaxSpeed) {
+        this.soundAtMaxSpeed = soundAtMaxSpeed;
+    }
+
+    public String getApplication() {
+        return application;
+    }
+
+    public void setApplication(String application) {
+        this.application = application;
+    }
+
+    public String getMountingLocation() {
+        return mountingLocation;
+    }
+
+    public void setMountingLocation(String mountingLocation) {
+        this.mountingLocation = mountingLocation;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
-    public List<ProductType> getProductTypeList() {
-        return productTypeList;
-    }
-
-    public void setProductTypeList(List<ProductType> productTypeList) {
-        this.productTypeList = productTypeList;
-    }
-
-    public List<TechnicalSpecs> getTechnicalSpecsList() {
-        return technicalSpecsList;
-    }
-
-    public void setTechnicalSpecsList(List<TechnicalSpecs> technicalSpecsList) {
-        this.technicalSpecsList = technicalSpecsList;
-    }
-
-    public LocalDateTime getModelYear() {
+    public Integer getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(LocalDateTime modelYear) {
+    public void setModelYear(Integer modelYear) {
         this.modelYear = modelYear;
     }
 
@@ -99,13 +180,7 @@ public class Product {
         this.timeCreated = timeCreated;
     }
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
 
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
-    }
 
     public ProductInfo getProductInfo() {
         return productInfo;
@@ -147,11 +222,13 @@ public class Product {
         this.type = type;
     }
 
-    public Set<Project> getProjectSet() {
-        return projectSet;
+    public void setProjectProductSet(Set<ProjectProduct> set) {
+        this.projectProductSet = set;
     }
 
-    public void setProjectSet(Set<Project> projectSet) {
-        this.projectSet = projectSet;
+    public Set<ProjectProduct> getProjectProductSet() {
+        return projectProductSet;
     }
+
+
 }
