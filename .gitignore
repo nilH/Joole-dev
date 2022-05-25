@@ -21,6 +21,7 @@ target/
 
 #resources
 src/main/resources/application.properties
+src/test/resources/jwt
 
 ### NetBeans ###
 /nbproject/private/
