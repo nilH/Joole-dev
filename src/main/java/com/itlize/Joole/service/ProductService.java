@@ -11,7 +11,7 @@ public interface ProductService {
     int deleteProduct(Product product);
     int updateProduct(Product product, int productId);
 
-    int findById(Integer productId);
+    Product findById(Integer productId);
 
     List<Product> findAllProduct();
     List<Product> findByName(String productName);

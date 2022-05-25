@@ -49,8 +49,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int findById(Integer productId) {
-        return 0;
+    public Product findById(Integer productId) {
+        return null;
     }
 
     @Override

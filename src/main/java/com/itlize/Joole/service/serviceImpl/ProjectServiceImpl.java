@@ -24,6 +24,40 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     ProjectProductRepository ppRepository;
 
+
+    public int addProject(Project project){
+        return 1;
+
+    }
+
+    public int deleteProject(Project project){
+        return 1;
+    }
+
+
+    public int updateProject(Project project,int projectId) {
+
+        return 0;
+    }
+
+
+    public Project findById(Integer projectId) {
+        return null;
+    }
+
+
+    public List<Project> findAllProject() {
+        return null;
+    }
+
+
+    public List<Project> findByName(String projectName) {
+        return null;
+    }
+
+
+
+    @Override
     public int addProductToProject(int productId, int projectId)
     {
         Set<ProjectProduct> ppSet = new HashSet<ProjectProduct>();

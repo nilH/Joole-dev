@@ -8,7 +8,7 @@ import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
 import com.itlize.Joole.service.MyUserDetailService;
-import com.itlize.Joole.service.serviceImpl.ProjectManageImpl;
+import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +38,7 @@ public class ProjectManageTest {
 
     @Autowired
     @InjectMocks
-    private ProjectManageImpl projectManage;
+    private ProjectServiceImpl projectManage;
     private Product product;
 
     private Project project;
