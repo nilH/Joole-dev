@@ -6,15 +6,16 @@ import com.itlize.Joole.entity.ProjectProduct;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
-import com.itlize.Joole.service.ProjectManage;
+import com.itlize.Joole.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
-public class ProjectManageImpl implements ProjectManage {
+public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectRepository projectRep;
@@ -43,5 +44,15 @@ public class ProjectManageImpl implements ProjectManage {
 
         return 1;
 
+    }
+
+    @Override
+    public int deleteProductFromProject(int productId, int projectId) {
+        return 0;
+    }
+
+    @Override
+    public List<Product> getProductFromProject(int projectId) {
+        return null;
     }
 }

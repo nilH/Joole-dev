@@ -2,7 +2,7 @@ package com.itlize.Joole.controller;
 
 //add product to project
 
-import com.itlize.Joole.service.serviceImpl.ProjectManageImpl;
+import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProjectController {
 
     @Autowired
-    private ProjectManageImpl manage;
+    private ProjectServiceImpl manage;
 
     @PostMapping("/add_Product_To_Project")
     public int addProduct(@RequestParam("productId") int productId,@RequestParam("projectId") int projectId)

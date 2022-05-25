@@ -2,7 +2,8 @@ package com.itlize.Joole.Service;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.repository.ProductRepository;
-import com.itlize.Joole.service.serviceImpl.ProductSearchServiceImpl;
+import com.itlize.Joole.service.ProductService;
+import com.itlize.Joole.service.serviceImpl.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ProductSearchTest {
     @Autowired
     @InjectMocks
-    ProductSearchServiceImpl productSearchServiceImpl;
+    ProductServiceImpl productServiceImpl;
 
     @Mock
     ProductRepository productRepository;
@@ -29,7 +30,7 @@ public class ProductSearchTest {
         productList.add(new Product());
         Mockito.when(productRepository.findByTypeIgnoreCaseContaining("fan")).thenReturn(productList);
         List<Product> productList1;
-        productList1=productSearchServiceImpl.searchByName("fan");
+        productList1=productServiceImpl.searchByType("fan");
         assert(productList1.size()>0);
     }
     @Test
@@ -38,7 +39,7 @@ public class ProductSearchTest {
         productList.add(new Product());
         Mockito.when(productRepository.findByUserTypeAndApplicationAndMountingLocationAndAccessoriesAndModelYearAndAirflowAndMaxPowerAndSoundAtMaxSpeedAndFanSweepDiameterAndHeight("usertype","application","mountinglocation","accessories",2022,2,2,2,2,2)).thenReturn(productList);
         List<Product> productList1;
-        productList1=productSearchServiceImpl.filter("usertype","application","mountinglocation","accessories",2022,2,2,2,2,2);
+        productList1=productServiceImpl.filter("usertype","application","mountinglocation","accessories",2022,2,2,2,2,2);
         assert(productList1.size()>0);
     }
 }
