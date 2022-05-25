@@ -32,6 +32,12 @@ public class ProjectRepositoryTest {
     @Test
     public void findByProjectNameTest()
     {
+        Project project = new Project();
+
+        project.setProjectName("MyProject");
+
+        projectRepository.save(project);
+
         List<Project> list = projectRepository.findByProjectName("MyProject");
 
         assert(list.get(0) != null);
