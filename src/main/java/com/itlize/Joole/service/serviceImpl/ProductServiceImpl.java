@@ -5,6 +5,7 @@ import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,8 +18,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int addProduct(Product product) {
         product.setTimeCreated(LocalDateTime.now());
-        productRepository.save(product);
-        return 0;
+        return productRepository.save(product).getProductId();
+    }
+
+    @Override
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
     }
 
     @Override
