@@ -16,7 +16,7 @@ public class ProjectProduct {
     @JoinColumn(name="product_id")
     private Product product;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="project_id")
     private Project project;
 

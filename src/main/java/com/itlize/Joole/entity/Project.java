@@ -1,6 +1,10 @@
 package com.itlize.Joole.entity;
 
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -15,12 +19,15 @@ public class Project {
     private Integer id;
 
     @Column(name="project_name")
+    @ColumnDefault(value = "''")
     private String projectName;
 
     @Column(name="time_update")
+    @LastModifiedDate
     private LocalDateTime timeUpdate;
 
     @Column(name="time_created")
+    @CreatedDate
     private LocalDateTime timeCreated;
 
 

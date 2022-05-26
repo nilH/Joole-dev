@@ -14,5 +14,7 @@ public interface ProjectProductRepository extends JpaRepository<ProjectProduct,I
 
     List<ProjectProduct> findByProduct(Product product);
 
+    void deleteByProjectAndProduct(Project project, Product product);
+
 
 }

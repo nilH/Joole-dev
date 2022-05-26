@@ -20,6 +20,7 @@ public class UserRepositoryTest {
         User user=new User();
         user.setName("user");
         user.setPassword("password");
+        user.setRole("customer");
         userRepository.save(user);
     }
 

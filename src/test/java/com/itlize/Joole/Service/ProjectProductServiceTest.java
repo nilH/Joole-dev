@@ -3,40 +3,35 @@ package com.itlize.Joole.Service;
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.entity.ProjectProduct;
-import com.itlize.Joole.entity.User;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
-import com.itlize.Joole.service.MyUserDetailService;
-import com.itlize.Joole.service.ProjectService;
-import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
+import com.itlize.Joole.service.serviceImpl.ProjectProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ProjectManageTest {
-
+public class ProjectProductServiceTest {
     @Mock
     ProductRepository productRepository;
     @Mock
     ProjectRepository projectRep;
     @Mock
-    ProjectProductRepository ppRepository;
+    ProjectProductRepository projectProductRepository;
 
-    @Autowired
     @InjectMocks
-    private ProjectServiceImpl projectServiceImp;
+    ProjectProductServiceImpl projectProductService;
+
     private Product product;
 
     private Project project;
@@ -75,50 +70,26 @@ public class ProjectManageTest {
         listOfPP.add(pp);
     }
 
-
-
     @Test
-    public void createProjectTest()
+    public void getProjectFromProduct(){
+        Product product=new Product();
+        List<ProjectProduct> projectProductList=new ArrayList<>();
+        ProjectProduct projectProduct=new ProjectProduct();
+        projectProduct.setProject(new Project());
+        projectProductList.add(projectProduct);
+        Mockito.when(projectProductRepository.findByProduct(product)).thenReturn(projectProductList);
+        List<Project> projectList=projectProductService.getProjectFromProduct(product);
+        assert (projectList.size()>0);
+    }
+    @Test
+    public void addProductToProjectTest()
     {
-        when(projectRep.save(any())).thenReturn(project);
-        when(projectRep.findByProjectName(any())).thenReturn(new ArrayList<>());
+        when(productRepository.findById(any())).thenReturn(Optional.ofNullable(product));
+        when(projectRep.findById(any())).thenReturn(Optional.ofNullable(project));
+        when(projectProductRepository.save(any())).thenReturn(pp);
 
-        assertThat(projectServiceImp.createProject(project)).isEqualTo(2);
+        assert(projectProductService.addProductToProject(1,2)==1);
     }
 
-    @Test
-    public void findAllProjectTest()
-    {
-        when(projectRep.findAll()).thenReturn(listOfProject);
-        assertThat(projectServiceImp.findAllProject()).isEqualTo(listOfProject);
-    }
-
-
-    @Test
-    public void findByNameTest()
-    {
-        when(projectRep.findByProjectName(any())).thenReturn(listOfProject);
-        assertThat(projectServiceImp.findByName("B")).isEqualTo(listOfProject);
-    }
-    /*@Test
-    public void updateProjectTest()
-    {
-        when(projectRep.findById(any())).thenReturn(project1);
-        assertThat(projectService.updateProject(project, 2)).isEqualTo(1);
-    }*/
-
-/*    @Test
-    public void deleteProject()
-    {
-        when(projectServiceImpl.simpleDeleteProject(project)).thenReturn(1);
-        assertThat(projectService.deleteProject(project)).isEqualTo(1);
-    }*/
-
-    @Test
-    public void findById(){
-        when(projectRep.findById(2)).thenReturn(Optional.of(project));
-        Project project2=projectServiceImp.findById(2);
-        assert (project2.getId()==2);
-    }
 
 }

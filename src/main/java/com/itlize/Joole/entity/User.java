@@ -1,6 +1,10 @@
 package com.itlize.Joole.entity;
 
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,16 +30,19 @@ public class User {
     private Integer id;
 
     @Column(name="pwd")
+    @ColumnDefault(value = "''")
     private String password;
 
-    @Column(name="customer_name",unique = true,nullable = true)
+    @Column(name="customer_name",unique = true,nullable = false)
     private String name;
 
     @Column(name="time_updated")
+    @LastModifiedDate
     private LocalDateTime timeUpdated;
 
 
     @Column(name="time_created")
+    @CreatedDate
     private LocalDateTime timeCreated;
 
 
@@ -45,8 +52,11 @@ public class User {
 //                    CascadeType.DETACH, CascadeType.REFRESH})
 //    private List<Project> project;
 
-    @Column(nullable = true)
+    //user type: customer, consumer, admin
+    @Column(nullable = false)
+    @ColumnDefault(value = "customer")
     private String role;
+
 
     public Integer getId() {
         return id;

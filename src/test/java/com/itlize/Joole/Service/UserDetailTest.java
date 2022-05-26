@@ -39,6 +39,7 @@ public class UserDetailTest {
         user.setPassword("123456");
     }
 
+    //test not implemented
     @Test
     public void loadUserByUsernameTest()
     {

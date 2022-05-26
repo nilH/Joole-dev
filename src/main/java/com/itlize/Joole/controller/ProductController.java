@@ -3,6 +3,7 @@ package com.itlize.Joole.controller;
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.service.ProductService;
+import com.itlize.Joole.service.ProjectProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+
+    @Autowired
+    ProjectProductService projectProductService;
     @PostMapping(value = "/add_product")
     public int addProduct(@RequestBody Product product){
         productService.addProduct(product);
@@ -66,7 +70,7 @@ public class ProductController {
 
     @GetMapping(value = "/get_project_from_product")
     public List<Project> getProjectFromProduct(@RequestBody Product product){
-        List<Project> result = productService.getProjectFromProduct(product);
+        List<Project> result = projectProductService.getProjectFromProduct(product);
         return result;
 
     }

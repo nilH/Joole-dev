@@ -75,14 +75,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByProductName(productName);
     }
 
-    @Override
-    public List<Project> getProjectFromProduct(Product product) {
-        List<ProjectProduct> projectProductList=projectProductRepository.findByProduct(product);
-        List<Project> projectList=new ArrayList<>();
-        for(ProjectProduct projectProduct:projectProductList){
-            projectList.add(projectProduct.getProject());
-        }
-        return projectList;
-    }
+
 
 }

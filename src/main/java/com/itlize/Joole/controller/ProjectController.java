@@ -4,6 +4,7 @@ package com.itlize.Joole.controller;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
+import com.itlize.Joole.service.ProjectProductService;
 import com.itlize.Joole.service.ProjectService;
 import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +18,27 @@ public class ProjectController {
 
     @Autowired
     private ProjectService manage;
+    @Autowired
+    private ProjectProductService projectProductService;
 
     @PostMapping("/add_product_to_project")
     public int addProductToProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
     {
-        manage.addProductToProject(productId, projectId);
+        projectProductService.addProductToProject(productId, projectId);
         return 1;
     }
 
     @PostMapping("/delete_product_from_project")
     public int deleteProductFromProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
     {
-        manage.deleteProductFromProject(productId, projectId);
+        projectProductService.deleteProductFromProject(productId, projectId);
         return 1;
     }
 
     @GetMapping("/get_product_from_project")
     public List<Product> getProductFromProject(@RequestParam("project_id") int projectId)
     {
-        List<Product> result = manage.getProductFromProject(projectId);
+        List<Product> result = projectProductService.getProductFromProject(projectId);
         return result;
     }
 

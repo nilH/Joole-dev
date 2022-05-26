@@ -1,6 +1,9 @@
 package com.itlize.Joole.entity;
 
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ public class Product {
     private Integer productId;
 
     @Column(name="product_name")
+    @ColumnDefault(value = "''")
     private String productName;
 
     @OneToMany(fetch=FetchType.LAZY,
@@ -26,45 +30,61 @@ public class Product {
 
 
     @Column(name="time_created")
+    @CreatedDate
     private LocalDateTime timeCreated;
 
 
     @Column(name = "model_year")
+    @ColumnDefault(value = "0")
     private Integer modelYear;
 
+    @ColumnDefault(value = "''")
     private String brand;
 
+    @ColumnDefault(value = "''")
     private String certificate;
 
 
+    @ColumnDefault(value = "''")
     private String category;
 
     //type is used for search. like "HVAC fans"
     @Column(nullable = false)
+    @ColumnDefault(value = "''")
     private String type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
     private ProductInfo productInfo;
 
 
+    @ColumnDefault(value = "''")
     private String manufacturer;
 
     @Column(name = "user_type")
+    @ColumnDefault(value = "''")
     private String userType;
+    @ColumnDefault(value = "''")
     private String application;
+    @ColumnDefault(value = "''")
     @Column(name = "mounting_location")
     private String mountingLocation;
 
+    @ColumnDefault(value = "0")
     private double airflow;
     @Column(name = "max_power")
+    @ColumnDefault(value = "0")
     private double maxPower;
 
+    @ColumnDefault(value = "0")
     @Column(name = "sound_at_max_speed")
     private double soundAtMaxSpeed;
 
+    @ColumnDefault(value = "0")
     @Column(name = "fan_sweep_diameter")
     private double fanSweepDiameter;
+    @ColumnDefault(value = "0")
     private double height;
+    @ColumnDefault(value = "''")
     private String accessories;
 
 

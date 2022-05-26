@@ -1,5 +1,7 @@
 package com.itlize.Joole.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,12 +22,15 @@ public class ProductInfo {
 
 
     @Column(name="product_details")
+    @ColumnDefault(value = "''")
     private String productDetails;
 
     @Column(name="contact")
+    @ColumnDefault(value = "''")
     private String contact;
 
     @Column(name="documentation")
+    @ColumnDefault(value = "''")
     private String documentation;
 
 
