@@ -53,8 +53,8 @@ public class User {
 //    private List<Project> project;
 
     //user type: customer, consumer, admin
-    @Column(nullable = false)
-    @ColumnDefault(value = "customer")
+
+    @ColumnDefault(value = "'customer'")
     private String role;
 
 
