@@ -1,6 +1,8 @@
 package com.itlize.Joole.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -22,6 +24,7 @@ public class Product {
             mappedBy="product",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
     private Set<ProjectProduct> projectProductSet = new HashSet<>();
 
 

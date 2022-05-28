@@ -104,8 +104,8 @@ public class AddProductToProjectTest {
     public void addProductToProject() throws Exception{
         login();
 
-        String productId = "24";
-        String projectId = "26";
+        String productId = "2";
+        String projectId = "2";
 
         String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
         MvcResult mvcResult=mockMvc.perform(post("/project/add_product_to_project")
@@ -119,21 +119,20 @@ public class AddProductToProjectTest {
     public void getProjectFromProduct() throws Exception{
         login();
 
-//        addProduct();
-//        addProject();
-        Product product = new Product();
-        product.setProductName("HEV33811");
+        String productId = "2";
 
         ObjectMapper objectMapper= new ObjectMapper();
-        //String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
+        String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
 
         MvcResult mvcResult=mockMvc.perform(get("/product/get_project_from_product")
-                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(product)))
+                        .header("Authorization","Bearer "+token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("product_id",productId))
                 .andReturn();
         String type=mvcResult.getResponse().getContentType();
         String response=mvcResult.getResponse().getContentAsString();
         System.out.println(type+response);
-        //System.out.println(mvcResult);
+
 
     }
 
@@ -141,14 +140,15 @@ public class AddProductToProjectTest {
     public void getProductFromProject() throws Exception{
         login();
 
-        Project project = new Project();
-        project.setProjectName("projectname~~~");
+        String projectId = "2";
 
         ObjectMapper objectMapper= new ObjectMapper();
-        //String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
+        String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
 
         MvcResult mvcResult=mockMvc.perform(get("/project/get_product_from_project")
-                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(project)))
+                        .header("Authorization","Bearer "+token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("project_id",projectId))
                 .andReturn();
         String type=mvcResult.getResponse().getContentType();
         String response=mvcResult.getResponse().getContentAsString();
@@ -162,8 +162,8 @@ public class AddProductToProjectTest {
 
         login();
 
-        String productId = "24";
-        String projectId = "26";
+        String productId = "2";
+        String projectId = "2";
 
         String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
         MvcResult mvcResult=mockMvc.perform(post("/project/delete_product_from_project")

@@ -1,6 +1,8 @@
 package com.itlize.Joole.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,12 +28,14 @@ public class Project {
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="customer_id")
+
     private User user;
 
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
     private Set<ProjectProduct> projectProduct = new HashSet<>();
 
 

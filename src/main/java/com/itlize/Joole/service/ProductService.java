@@ -16,7 +16,7 @@ public interface ProductService {
     List<Product> findAllProduct();
     List<Product> findByName(String productName);
 
-    List<Project> getProjectFromProduct(Product product);
+    List<Project> getProjectFromProduct(int productId);
     List<Product> searchByType(String name);
     List<Product> filter(String userType, String application, String mountingLocation, String accessories, int modelYear, double airflow, double maxPower, double soundAtMaxSpeed, double fanSweepDiameter, double height);
 

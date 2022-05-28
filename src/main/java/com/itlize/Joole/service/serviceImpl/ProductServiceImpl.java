@@ -13,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
+
 
     @Autowired
     ProjectProductRepository projectProductRepository;
@@ -75,14 +77,37 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByProductName(productName);
     }
 
-    @Override
-    public List<Project> getProjectFromProduct(Product product) {
-        List<ProjectProduct> projectProductList=projectProductRepository.findByProduct(product);
-        List<Project> projectList=new ArrayList<>();
-        for(ProjectProduct projectProduct:projectProductList){
-            projectList.add(projectProduct.getProject());
-        }
-        return projectList;
-    }
+//    @Override
+//    public List<Project> getProjectFromProduct(Product product) {
+//        List<ProjectProduct> projectProductList=projectProductRepository.findByProduct(product);
+//        List<Project> projectList=new ArrayList<>();
+//        for(ProjectProduct projectProduct:projectProductList){
+//            projectList.add(projectProduct.getProject());
+//        }
+//        return projectList;
+//    }
 
+    @Override
+    public List<Project> getProjectFromProduct(int productId) {
+
+        List<Project> output = new ArrayList<Project>();
+
+        Product product = productRepository.findById(productId).orElse(null);
+
+        if(product ==null)
+        {
+            return null;
+        }
+
+        List<ProjectProduct> ppList = projectProductRepository.findByProduct(product);
+
+        Iterator<ProjectProduct> it = ppList.iterator();  // Traverse the set
+
+        while (it.hasNext()) {
+            ProjectProduct pp = it.next();
+            output.add(pp.getProject());     // Add every product
+        }
+
+        return output;
+    }
 }
