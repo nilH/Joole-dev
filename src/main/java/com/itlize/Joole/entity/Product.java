@@ -2,6 +2,8 @@ package com.itlize.Joole.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,6 +20,7 @@ public class Product {
     private Integer productId;
 
     @Column(name="product_name")
+    @ColumnDefault("''")
     private String productName;
 
     @OneToMany(fetch=FetchType.LAZY,
@@ -29,45 +32,54 @@ public class Product {
 
 
     @Column(name="time_created")
+    @CreatedDate
     private LocalDateTime timeCreated;
 
 
     @Column(name = "model_year")
+    @ColumnDefault("0")
     private Integer modelYear;
-
+    @ColumnDefault("''")
     private String brand;
-
+    @ColumnDefault("''")
     private String certificate;
 
-
+    @ColumnDefault("''")
     private String category;
 
     //type is used for search. like "HVAC fans"
-    @Column(nullable = false)
+    @Column(nullable = false,length = 50)
+    @ColumnDefault("''")
     private String type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
     private ProductInfo productInfo;
 
-
+    @ColumnDefault("''")
     private String manufacturer;
 
     @Column(name = "user_type")
+    @ColumnDefault("''")
     private String userType;
+    @ColumnDefault("''")
     private String application;
     @Column(name = "mounting_location")
+    @ColumnDefault("''")
     private String mountingLocation;
-
+    @ColumnDefault("0")
     private double airflow;
+    @ColumnDefault("0")
     @Column(name = "max_power")
     private double maxPower;
-
+    @ColumnDefault("0")
     @Column(name = "sound_at_max_speed")
     private double soundAtMaxSpeed;
-
+    @ColumnDefault("0")
     @Column(name = "fan_sweep_diameter")
     private double fanSweepDiameter;
+    @ColumnDefault("0")
     private double height;
+    @ColumnDefault("''")
     private String accessories;
 
 
