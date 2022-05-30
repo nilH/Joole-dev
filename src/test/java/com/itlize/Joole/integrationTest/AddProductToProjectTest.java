@@ -32,7 +32,7 @@ public class AddProductToProjectTest {
         String password = "password";
         ObjectMapper objectMapper= new ObjectMapper();
         MvcResult mvcResult=mockMvc.perform(get("/user/login").param("username",username).param("password",password))
-                .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=ISO-8859-1"))).andReturn();
+                .andReturn();
         String token=mvcResult.getResponse().getContentAsString();
         Files.writeString(Path.of("src/test/resources/jwt"),token,
                 StandardCharsets.ISO_8859_1, StandardOpenOption.WRITE);

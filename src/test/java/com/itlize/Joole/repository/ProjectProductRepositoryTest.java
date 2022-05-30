@@ -60,7 +60,10 @@ class ProjectProductRepositoryTest {
         projectProduct.setProduct(product);
         projectProduct.setProject(project);
         ppRepository.save(projectProduct);
-        List<ProjectProduct> pp = ppRepository.findByProduct(productReturn);
+        Product product1=new Product();
+        product1.setProductId(productReturn.getProductId());
+        product1.setProductName("eaeff");
+        List<ProjectProduct> pp = ppRepository.findByProduct(product1);
 
         assert(pp.size()>0);
 

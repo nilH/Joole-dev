@@ -1,6 +1,7 @@
 package com.itlize.Joole.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,12 +34,14 @@ public class Project {
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="customer_id")
+    @ColumnDefault(value = "0")
     private User user;
 
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="project",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
     private Set<ProjectProduct> projectProduct = new HashSet<>();
 
 

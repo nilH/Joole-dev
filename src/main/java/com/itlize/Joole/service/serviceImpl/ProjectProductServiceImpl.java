@@ -40,13 +40,15 @@ public class ProjectProductServiceImpl implements ProjectProductService {
 
         if(product == null || project ==null)
         {
-            return 0;
+            return 1;
         }
 
         ProjectProduct pp = new ProjectProduct();
         pp.setProduct(product);
         pp.setProject(project);
-
+        if(project.getProjectProduct().contains(pp)){
+            return 1;
+        }
         try {
             projectProductRepository.save(pp);
         }catch (Exception e)
@@ -55,7 +57,7 @@ public class ProjectProductServiceImpl implements ProjectProductService {
             return 0;
         }
 
-        return 1;
+        return 0;
 
     }
     @Override
