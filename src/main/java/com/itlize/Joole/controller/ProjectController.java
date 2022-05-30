@@ -4,10 +4,11 @@ package com.itlize.Joole.controller;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
-import com.itlize.Joole.service.ProjectProductService;
 import com.itlize.Joole.service.ProjectService;
 import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,64 +19,94 @@ public class ProjectController {
 
     @Autowired
     private ProjectService manage;
-    @Autowired
-    private ProjectProductService projectProductService;
 
     @PostMapping("/add_product_to_project")
-    public int addProductToProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
+    public ResponseEntity<?> addProductToProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
     {
-        projectProductService.addProductToProject(productId, projectId);
-        return 1;
+        int result = manage.addProductToProject(productId, projectId);
+        if (result == 0) {
+            return new ResponseEntity<>("{\"Project or Product Not exist!\"}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+
+
     }
 
     @PostMapping("/delete_product_from_project")
-    public int deleteProductFromProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
+    public ResponseEntity<?> deleteProductFromProject(@RequestParam("product_id") Integer productId,@RequestParam("project_id") Integer projectId)
     {
-        projectProductService.deleteProductFromProject(productId, projectId);
-        return 1;
+        int result = manage.deleteProductFromProject(productId, projectId);
+        if (result == 0) {
+            return new ResponseEntity<>("{\"Project or Product Not exist!\"}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get_product_from_project")
-    public List<Product> getProductFromProject(@RequestParam("project_id") int projectId)
+    public ResponseEntity<?> getProductFromProject(@RequestParam("project_id") int projectId)
     {
-        List<Product> result = projectProductService.getProductFromProject(projectId);
-        return result;
+        List<Product> result = manage.getProductFromProject(projectId);
+        if (result == null) {
+            return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(value = "/add_project")
-    public int addProject(@RequestBody Project project){
-        manage.createProject(project);
-        return 1;
+    public ResponseEntity<?> addProject(@RequestBody Project project){
+        Integer result = manage.createProject(project);
+        if (result == null) {
+            return new ResponseEntity<>("{\"unknown mistake!\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/delete_project")
-    public int deleteProject(@RequestBody Project project){
-        manage.deleteProject(project);
-        return 1;
+    public ResponseEntity<?> deleteProject(@RequestParam("project_id") int projectId){
+        Project project1 = manage.findById(projectId);
+        if (project1 == null) {
+            return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
+        }
+        manage.deleteProject(project1);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/update_project")
-    public int updateProject(@RequestBody Project project,@RequestParam("project_id") Integer projectId){
+    public ResponseEntity<?> updateProject(@RequestBody Project project,@RequestParam("project_id") Integer projectId){
+        Project project1 = manage.findById(projectId);
+        if (project1 == null) {
+            return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
+        }
         manage.updateProject(project, projectId);
-        return 1;
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/findall_project")
-    public List<Project> findAllProject() {
+    public ResponseEntity<?> findAllProject() {
         List<Project> result = manage.findAllProject();
-        return result;
+        if (result == null) {
+            return new ResponseEntity<>("{\"Empty!\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/findby_projectid")
-    public Project findById(@RequestParam("project_id") Integer projectId){
+    public ResponseEntity<?> findById(@RequestParam("project_id") Integer projectId){
         Project result = manage.findById(projectId);
-        return result;
+        if (result == null) {
+            return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/findby_projectname")
-    public List<Project> findByName(@RequestParam("project_name") String projectName){
+    public ResponseEntity<?> findByName(@RequestParam("project_name") String projectName){
         List<Project> result = manage.findByName(projectName);
-        return result;
+        if (result == null) {
+            return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

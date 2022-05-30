@@ -26,8 +26,6 @@ public class ProductManageTest {
     @InjectMocks
     ProductServiceImpl productServiceImpl;
 
-
-
     @Mock
     ProductRepository productRepository;
     @Mock
@@ -73,5 +71,16 @@ public class ProductManageTest {
         assert (product1.getProductName().equals("returnProductName"));
     }
 
-
+    @Test
+    public void getProjectFromProduct(){
+        Product product=new Product();
+        int productId = product.getProductId();
+        List<ProjectProduct> projectProductList=new ArrayList<>();
+        ProjectProduct projectProduct=new ProjectProduct();
+        projectProduct.setProject(new Project());
+        projectProductList.add(projectProduct);
+        Mockito.when(projectProductRepository.findByProduct(product)).thenReturn(projectProductList);
+        List<Project> projectList=productServiceImpl.getProjectFromProduct(productId);
+        assert (projectList.size()>0);
+    }
 }
