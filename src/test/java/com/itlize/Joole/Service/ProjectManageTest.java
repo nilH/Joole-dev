@@ -3,12 +3,11 @@ package com.itlize.Joole.Service;
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.entity.ProjectProduct;
-import com.itlize.Joole.entity.User;
+
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
-import com.itlize.Joole.service.MyUserDetailService;
-import com.itlize.Joole.service.ProjectService;
+
 import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

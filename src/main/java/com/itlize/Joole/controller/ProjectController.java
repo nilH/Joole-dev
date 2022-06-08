@@ -6,7 +6,6 @@ import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.service.ProjectProductService;
 import com.itlize.Joole.service.ProjectService;
-import com.itlize.Joole.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +57,7 @@ public class ProjectController {
     @PostMapping(value = "/add_project")
     public ResponseEntity<?> addProject(@RequestBody Project project){
         Integer result = projectService.createProject(project);
-        if (result == null) {
+        if (result == -1) {
             return new ResponseEntity<>("{\"unknown mistake!\"}",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.CREATED);

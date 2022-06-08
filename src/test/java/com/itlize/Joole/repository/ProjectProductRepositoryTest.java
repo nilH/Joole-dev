@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import static org.assertj.core.api.Assertions.assertThat;
+
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -36,7 +34,7 @@ class ProjectProductRepositoryTest {
         product.setProductName("productname");
         product.setType("type");
         product.setBrand("brand");
-        Product productReturn=productRepository.save(product);
+        productRepository.save(product);
         ProjectProduct projectProduct=new ProjectProduct();
         projectProduct.setProduct(product);
         projectProduct.setProject(project);
@@ -51,7 +49,7 @@ class ProjectProductRepositoryTest {
     void findByProduct() {
         Project project=new Project();
         project.setProjectName("projectname");
-        Project projectReturn=projectRepository.save(project);
+        projectRepository.save(project);
         Product product=new Product();
         product.setProductName("productname");
         product.setType("type");
@@ -73,11 +71,11 @@ class ProjectProductRepositoryTest {
     public void saveProjectProduct(){
         Project project=new Project();
         project.setProjectName("projectname");
-        Project projectReturn=projectRepository.save(project);
+        projectRepository.save(project);
         Product product=new Product();
         product.setProductName("productname");
         product.setType("type");
-        Product productReturn=productRepository.save(product);
+        productRepository.save(product);
         ProjectProduct projectProduct=new ProjectProduct();
         projectProduct.setProduct(product);
         projectProduct.setProject(project);

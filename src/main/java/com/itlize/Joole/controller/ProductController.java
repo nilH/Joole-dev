@@ -2,15 +2,15 @@ package com.itlize.Joole.controller;
 
 import com.itlize.Joole.entity.Product;
 import com.itlize.Joole.entity.Project;
-import com.itlize.Joole.entity.User;
 import com.itlize.Joole.service.ProductService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -40,7 +40,7 @@ public class ProductController {
 //        product1.setCertificate(product.getCertificate());
 
         Integer result = productService.addProduct(product);
-        if (result == null) {
+        if (result == -1) {
             return new ResponseEntity<>("{\"unknown mistake!\"}",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.CREATED);

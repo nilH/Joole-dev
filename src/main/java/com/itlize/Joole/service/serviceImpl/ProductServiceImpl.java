@@ -5,10 +5,10 @@ import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.entity.ProjectProduct;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
-import com.itlize.Joole.repository.ProjectRepository;
+
 import com.itlize.Joole.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

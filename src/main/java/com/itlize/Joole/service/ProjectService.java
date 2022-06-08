@@ -1,6 +1,6 @@
 package com.itlize.Joole.service;
 
-import com.itlize.Joole.entity.Product;
+
 import com.itlize.Joole.entity.Project;
 
 import java.util.List;

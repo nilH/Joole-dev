@@ -1,9 +1,9 @@
 package com.itlize.Joole.service.serviceImpl;
 
-import com.itlize.Joole.entity.Product;
+
 import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.entity.ProjectProduct;
-import com.itlize.Joole.repository.ProductRepository;
+
 import com.itlize.Joole.repository.ProjectProductRepository;
 import com.itlize.Joole.repository.ProjectRepository;
 import com.itlize.Joole.service.ProjectService;

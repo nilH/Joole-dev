@@ -13,7 +13,7 @@ package com.itlize.Joole.integrationTest;
         import org.springframework.http.MediaType;
         import org.springframework.test.web.servlet.MockMvc;
         import org.springframework.test.web.servlet.MvcResult;
-        import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 
         import java.nio.charset.StandardCharsets;
         import java.nio.file.Files;
@@ -36,7 +36,7 @@ public class AddProductToProjectTest {
 
         String username = "username1";
         String password = "password";
-        ObjectMapper objectMapper= new ObjectMapper();
+
         MvcResult mvcResult=mockMvc.perform(get("/user/login").param("username",username).param("password",password))
                 .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=ISO-8859-1"))).andReturn();
         String token=mvcResult.getResponse().getContentAsString();
@@ -121,7 +121,6 @@ public class AddProductToProjectTest {
 
         String productId = "2";
 
-        ObjectMapper objectMapper= new ObjectMapper();
         String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
 
         MvcResult mvcResult=mockMvc.perform(get("/product/get_project_from_product")
@@ -142,7 +141,7 @@ public class AddProductToProjectTest {
 
         String projectId = "2";
 
-        ObjectMapper objectMapper= new ObjectMapper();
+
         String token=Files.readString(Path.of("src/test/resources/jwt"), StandardCharsets.ISO_8859_1);
 
         MvcResult mvcResult=mockMvc.perform(get("/project/get_product_from_project")

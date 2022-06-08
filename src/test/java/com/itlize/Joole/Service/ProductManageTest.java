@@ -5,7 +5,7 @@ import com.itlize.Joole.entity.Project;
 import com.itlize.Joole.entity.ProjectProduct;
 import com.itlize.Joole.repository.ProductRepository;
 import com.itlize.Joole.repository.ProjectProductRepository;
-import com.itlize.Joole.service.ProductService;
+
 import com.itlize.Joole.service.serviceImpl.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
