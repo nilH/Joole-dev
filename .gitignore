@@ -40,3 +40,6 @@ build/
 ### Maven ###
 .mvn/
 *.bak
+
+#npm#
+node_modules

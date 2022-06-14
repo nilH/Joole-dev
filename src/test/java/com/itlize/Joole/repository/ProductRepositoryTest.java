@@ -35,7 +35,7 @@ public class ProductRepositoryTest {
         product.setProductName("HVAC8h8811");
         product.setType(type);
         productRepository.save(product);
-        List<Product> productList =productRepository.findByTypeIgnoreCaseContaining("fan");
+        List<Product> productList =productRepository.findByProductNameContaining("fan");
         assert(productList.size()>0);
     }
 
@@ -67,7 +67,7 @@ public class ProductRepositoryTest {
         product.setType(type);
         productRepository.save(product);
         productRepository.delete(product);
-        List<Product> productList=productRepository.findByTypeIgnoreCaseContaining("fan");
+        List<Product> productList=productRepository.findByProductNameContaining("fan");
         assert(productList.size()==0);
     }
     @Test

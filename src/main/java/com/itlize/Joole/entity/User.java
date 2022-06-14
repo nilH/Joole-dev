@@ -5,18 +5,21 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 
@@ -46,11 +49,12 @@ public class User {
     private LocalDateTime timeCreated;
 
 
-//    @OneToMany(fetch=FetchType.LAZY,
-//            mappedBy="user",
-//            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-//                    CascadeType.DETACH, CascadeType.REFRESH})
-//    private List<Project> project;
+   @OneToMany(fetch=FetchType.LAZY,
+           mappedBy="user",
+           cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                   CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
+   private List<Project> project;
 
     //user type: customer, consumer, admin
 
@@ -106,13 +110,13 @@ public class User {
         this.timeCreated = timeCreated;
     }
 
-//    public List<Project> getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(List<Project> project) {
-//        this.project = project;
-//    }
+   public List<Project> getProject() {
+       return project;
+   }
+
+   public void setProject(List<Project> project) {
+       this.project = project;
+   }
 
 
 }

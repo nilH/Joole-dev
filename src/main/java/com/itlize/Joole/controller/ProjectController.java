@@ -1,5 +1,7 @@
 package com.itlize.Joole.controller;
 
+import com.itlize.Joole.dto.ProjectInfo;
+
 //add product to project
 
 import com.itlize.Joole.entity.Product;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -99,7 +102,14 @@ public class ProjectController {
         if (result == null) {
             return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        List<String> productNames=new ArrayList<>();
+        List<Integer> productIds=new ArrayList<>();
+        for(Product product:projectProductService.getProductFromProject(projectId)){
+            productNames.add(product.getProductName());
+            productIds.add(product.getProductId());
+        }
+        ProjectInfo projectInfo=new ProjectInfo(result.getId(),result.getProjectName(),productIds,productNames);
+        return new ResponseEntity<ProjectInfo>(projectInfo, HttpStatus.OK);
     }
 
     @GetMapping(value = "/findby_projectname")

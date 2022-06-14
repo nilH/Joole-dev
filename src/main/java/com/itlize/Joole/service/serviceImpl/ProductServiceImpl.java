@@ -43,8 +43,25 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<Product> searchByType(String name) {
-        return productRepository.findByTypeIgnoreCaseContaining(name);
+    public List<Product> searchByName(String name) {
+        return productRepository.findByProductNameContaining(name);
+    }
+
+    @Override
+    public List<Product> searchByNameAndProject(String name, Project project) {
+        List<Product> products=productRepository.findByProductNameContaining(name);
+        List<ProjectProduct> projectProducts=projectProductRepository.findByProject(project);
+        List<Product> productsInProject=new ArrayList<>();
+        for(ProjectProduct projectProduct:projectProducts){
+            productsInProject.add(projectProduct.getProduct());
+        }
+        List<Product> result=new ArrayList<>();
+        for(Product product:productsInProject){
+            if(products.contains(product)){
+                result.add(product);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -76,16 +93,6 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findByName(String productName) {
         return productRepository.findByProductName(productName);
     }
-
-//    @Override
-//    public List<Project> getProjectFromProduct(Product product) {
-//        List<ProjectProduct> projectProductList=projectProductRepository.findByProduct(product);
-//        List<Project> projectList=new ArrayList<>();
-//        for(ProjectProduct projectProduct:projectProductList){
-//            projectList.add(projectProduct.getProject());
-//        }
-//        return projectList;
-//    }
 
     @Override
     public List<Project> getProjectFromProduct(int productId) {

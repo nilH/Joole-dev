@@ -17,27 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     @Autowired
     ProductService productService;
-//
-//    public ResponseEntity<?> register(@RequestBody User user)
-//    {
-//        if(userService.findByUsername(user.getName())!=null){
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-//        User user1=new User();
-//        user1.setPassword(user.getPassword());
-//        user1.setName(user.getName());
-//        user1.setTimeCreated(LocalDateTime.now());
-//        user1.setRole("User");
-//        return new ResponseEntity<>(userService.saveUser(user1), HttpStatus.CREATED);
-//    }
+
 
     @PostMapping(value = "/add_product")
     public ResponseEntity<?> addProduct(@RequestBody Product product){
-//        Product product1 = new Product();
-//        product1.setProductName(product.getProductName());
-//        product1.setType(product.getType());
-//        product1.setProductInfo(product.getProductInfo());
-//        product1.setCertificate(product.getCertificate());
 
         Integer result = productService.addProduct(product);
         if (result == -1) {
@@ -56,9 +39,11 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/search_by_type")
-    public ResponseEntity<?>  searchByType(@RequestParam("type") String type){
-        List<Product> result=productService.searchByType(type);
+    @GetMapping(value = "/search_by_name_and_project")
+    public ResponseEntity<?>  searchByNameAndProject(@RequestParam("name") String name,@RequestParam("project_id") int projectId){
+        Project project=new Project();
+        project.setId(projectId);
+        List<Product> result=productService.searchByNameAndProject(name,project);
         if (result == null) {
             return new ResponseEntity<>("{\"Not exist!\"}",HttpStatus.BAD_REQUEST);
         }

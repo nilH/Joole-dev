@@ -46,9 +46,9 @@ public class ProductManageTest {
     public void productSearchByTypeTest(){
         List<Product> productList=new ArrayList<>();
         productList.add(new Product());
-        Mockito.when(productRepository.findByTypeIgnoreCaseContaining("fan")).thenReturn(productList);
+        Mockito.when(productRepository.findByProductNameContaining("fan")).thenReturn(productList);
         List<Product> productList1;
-        productList1=productServiceImpl.searchByType("fan");
+        productList1=productServiceImpl.searchByName("fan");
         assert(productList1.size()>0);
     }
     @Test

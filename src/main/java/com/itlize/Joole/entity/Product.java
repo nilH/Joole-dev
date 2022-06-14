@@ -52,6 +52,7 @@ public class Product {
     private String type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "product_info_id")
+    @JsonIgnore
     private ProductInfo productInfo;
 
     @ColumnDefault("''")
